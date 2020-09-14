@@ -1,28 +1,5 @@
-# Player class holds the name and lives of each player
-class Players
-    attr_accessor :lives, :name
-
-    def initialize(name, lives = 3)
-        @name = name
-        @lives = lives
-    end
-
-    def stillPlaying
-        @lives > 0
-    end
-
-end
-
-class Questions
-    attr_accessor :answer, :val1, :val2
-    
-    def initialize
-        #Generate random value between 1 to 10    
-        @val1 = rand(1...10)
-        @val2 = rand(1...10)
-        @answer = @val1 + @val2
-    end
-end
+require "./players"
+require "./questions"
 
 
 # Get the info from the terminal
@@ -95,9 +72,9 @@ if(playerTwo.lives == 0)
     puts "LOSSER -> #{playerTwo.name}: #{playerTwo.lives}/3"
     puts "////////////// GAME-OVER //////////////"
 else 
-    puts "#{playerTwo.name} Wins!!!"
-    puts "//// Final Score ////"
+    puts "--------> #{playerTwo.name} Wins!!! <--------"
+    puts "////////////// Final-Score //////////////"
     puts "WINNER -> #{playerTwo.name}: #{playerTwo.lives}/3"
     puts "LOSSER ->#{playerOne.name}: #{playerOne.lives}/3"
-    puts "////////////// GAME-OVER //////////////"
+    puts "/////////////// GAME-OVER ///////////////"
 end
