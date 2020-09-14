@@ -75,18 +75,29 @@ while playerOne.stillPlaying && playerTwo.stillPlaying do
     puts "#{player.name}: What is the sum of #{question.val1} and #{question.val2}"
     print "What's your answer: "
     answer = gets.chomp
-    if answer.to_i == question.answer && player.lives == 3
-        puts "Success!"
-        puts "You still have #{player.lives} lives left"
-    elsif answer.to_i == question.answer && player.lives > 0  
-        player.lives -= 1
-        puts "lost a life"
-        puts "You still have #{player.lives} lives left"
+    if answer.to_i == question.answer
+        puts "Correct!"
+        puts "Score -> #{playerOne.name}: #{playerOne.lives}/3 || #{playerTwo.name}: #{playerTwo.lives}/3"
     else
         player.lives -= 1
-        puts "Game Over!!!"
+        puts "Incorrect! You lost a life"
+        puts "Score -> #{playerOne.name}: #{playerOne.lives}/3 || #{playerTwo.name}: #{playerTwo.lives}/3"
     end
 
     # when there is no remainder its player one's turn && if its not zero then player two
     turn = (turn + 1) % 2
+end
+
+if(playerTwo.lives == 0)
+    puts "#{playerOne.name} Wins!!!"
+    puts "//// Final Score ////"
+    puts "WINNER -> #{playerOne.name}: #{playerOne.lives}/3"
+    puts "LOSSER -> #{playerTwo.name}: #{playerTwo.lives}/3"
+    puts "////////////// GAME-OVER //////////////"
+else 
+    puts "#{playerTwo.name} Wins!!!"
+    puts "//// Final Score ////"
+    puts "WINNER -> #{playerTwo.name}: #{playerTwo.lives}/3"
+    puts "LOSSER ->#{playerOne.name}: #{playerOne.lives}/3"
+    puts "////////////// GAME-OVER //////////////"
 end
