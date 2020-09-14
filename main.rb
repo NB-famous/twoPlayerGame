@@ -26,9 +26,16 @@ end
 
 
 # Get the info from the terminal
-playerName = gets.chomp
+# Player 1
+print "What's your name player one: "
+player1Name = gets.chomp
+# Player 2 
+print "What's your name player two: "
+player2Name = gets.chomp
 
-playerOne = Players.new(playerName)
+
+playerOne = Players.new(player1Name)
+playerTwo = Players.new(player2Name)
 
 #test 1 check if info can be retrieve from class players
 =begin 
@@ -57,21 +64,29 @@ end
 =end
 
 # test 3 See if we can create a condition where when output a question and input a answer(.gets.chomp)
-while playerOne.stillPlaying do
+
+# initialize turn to zero to say player one
+turn = 0
+
+while playerOne.stillPlaying && playerTwo.stillPlaying do
+    player = (turn == 0) ? playerOne : playerTwo
+    puts " #{player.name} it's now your turn "
     question = Questions.new
-    puts "#{playerOne.name}: What is the sum of #{question.val1} and #{question.val2}"
+    puts "#{player.name}: What is the sum of #{question.val1} and #{question.val2}"
     print "What's your answer: "
     answer = gets.chomp
-    if answer.to_i == question.answer && playerOne.lives == 3
+    if answer.to_i == question.answer && player.lives == 3
         puts "Success!"
-        puts "You still have #{playerOne.lives} lives left"
-    elsif answer.to_i == question.answer && playerOne.lives > 0  
-        playerOne.lives -= 1
+        puts "You still have #{player.lives} lives left"
+    elsif answer.to_i == question.answer && player.lives > 0  
+        player.lives -= 1
         puts "lost a life"
-        puts "You still have #{playerOne.lives} lives left"
+        puts "You still have #{player.lives} lives left"
     else
-        playerOne.lives -= 1
+        player.lives -= 1
         puts "Game Over!!!"
     end
 
+    # when there is no remainder its player one's turn && if its not zero then player two
+    turn = (turn + 1) % 2
 end
